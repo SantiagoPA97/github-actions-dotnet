@@ -1,4 +1,4 @@
-name: PR Verify            # set this to the .NET Core version to use
+name: PR Verify           
 
 on:
   pull_request:
