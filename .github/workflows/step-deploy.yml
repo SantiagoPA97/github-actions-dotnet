@@ -6,7 +6,7 @@ on:
       env:
         required: true
         type: string
-
+        
 jobs:
   deploy:
     name: Deploy to ${{ inputs.env }}
