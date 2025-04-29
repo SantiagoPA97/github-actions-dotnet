@@ -6,6 +6,13 @@ on:
       env:
         required: true
         type: string
+      resource-group:
+        required: true
+        type: string
+      app-name:
+        required: true
+        type: string
+
     secrets:
       AZURE_CLIENT_ID:
         required: true
@@ -13,7 +20,7 @@ on:
         required: true
       AZURE_SUBSCRIPTION_ID:
         required: true
-        
+
 jobs:
   deploy:
     name: Deploy to ${{ inputs.env }}
@@ -34,8 +41,18 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: 'Deploy To Azure App Service'
+      - name: "Deploy To Azure App Service"
         uses: azure/webapps-deploy@v2
         with:
-          app-name: app-weatherforecastapi-${{ inputs.env }}
+          app-name: ${{ inputs.app-name }}
+          slot-name: slot
           package: artifacts
+
+      - name: "Swap Slots"
+        run: |
+          az webapp deployment slot swap \
+            -g ${{ inputs.resource-group }} \
+            -n ${{ inputs.app-name }} \
+            --slot slot \
+            --target-slot production \
+            --verbose
