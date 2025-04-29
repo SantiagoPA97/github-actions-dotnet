@@ -46,7 +46,7 @@ jobs:
           name: personal-artifact
           path: artifacts
 
-      - name: 'Deploay To Azure App Service'
+      - name: 'Deploy To Azure App Service'
         uses: azure/webapps-deploy@v2
         with:
           app-name: app-weatherforecastapi-dev
