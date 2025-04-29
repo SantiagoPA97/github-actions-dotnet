@@ -42,6 +42,8 @@ jobs:
     uses: ./.github/workflows/step-deploy.yml
     with:
       env: dev
+      resource-group: rg-weatherforecast-dev
+      app-name: app-weatherforecastapi-dev
     secrets: inherit
 
   deploy_prod:
@@ -49,4 +51,6 @@ jobs:
     uses: ./.github/workflows/step-deploy.yml
     with:
       env: prod
+      resource-group: rg-weatherforecast-prod
+      app-name: app-weatherforecastapi-prod
     secrets: inherit
